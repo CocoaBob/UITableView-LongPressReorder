@@ -90,6 +90,8 @@
             if ([(id)_tableView.lprDelegate respondsToSelector:@selector(tableView:draggingViewForCellAtIndexPath:)]) {
                 _draggingView = [_tableView.lprDelegate tableView:_tableView draggingViewForCellAtIndexPath:indexPath];
             } else {
+                // stop editing to close all actions (for example, delete button)
+                [self.tableView setEditing:NO animated:NO];
                 // make a snapshot from the pressed tableview cell
                 _draggingView = [cell snapshotViewAfterScreenUpdates:NO];
                 if (!_draggingView) {
